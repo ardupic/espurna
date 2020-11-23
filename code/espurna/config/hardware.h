@@ -369,9 +369,12 @@
     #define BUTTON1_PIN         0
     #define BUTTON1_CONFIG      BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH
     #define BUTTON1_RELAY       1
+
     #define BUTTON2_PIN         4
     #define BUTTON2_CONFIG      BUTTON_SWITCH | BUTTON_SET_PULLUP | BUTTON_DEFAULT_HIGH
     #define BUTTON2_RELAY       1
+    #define BUTTON2_PRESS       BUTTON_ACTION_ON
+    #define BUTTON2_RELEASE     BUTTON_ACTION_OFF
 
     // Relays
     #define RELAY1_PIN          12
@@ -3463,6 +3466,63 @@
     #define HLW8012_VOLTAGE_RATIO       313400
     #define HLW8012_POWER_RATIO         3414290
     #define HLW8012_INTERRUPT_ON        FALLING
+
+// ----------------------------------------------------------------------------------------
+//  Power strip 15A - 3 Sockets + 3 USB ports 
+//  This device uses just one digital button (main one). All other three buttons are connected 
+//  to the ADC pin via resistors with different values. This approach is known under the name of
+//  "Resistor Ladder" - https://en.wikipedia.org/wiki/Resistor_ladder
+//  https://www.amazon.de/-/en/gp/product/B085XXCPRD
+// ----------------------------------------------------------------------------------------
+
+#elif defined(GOSUND_P1)
+
+    // Info
+    #define MANUFACTURER                "GOSUND"
+    #define DEVICE                      "P1"
+
+    
+    //Enable this to view buttons analog level.
+    //#define ANALOG_SUPPORT                1
+
+    // Disable UART noise
+    #define DEBUG_SERIAL_SUPPORT            0
+
+    // Buttons
+    #define BUTTON_PROVIDER_ANALOG_SUPPORT  1
+    #define BUTTON1_PIN                     16
+    #define BUTTON1_CONFIG                  BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH
+    #define BUTTON1_RELAY                   4
+
+    #define BUTTON2_PIN                     17
+    #define BUTTON2_RELAY                   3
+    #define BUTTON2_PROVIDER                BUTTON_PROVIDER_ANALOG
+    #define BUTTON2_ANALOG_LEVEL            220
+
+    #define BUTTON3_PIN                     17
+    #define BUTTON3_RELAY                   2
+    #define BUTTON3_PROVIDER                BUTTON_PROVIDER_ANALOG
+    #define BUTTON3_ANALOG_LEVEL            470
+
+    #define BUTTON4_PIN                     17
+    #define BUTTON4_RELAY                   1
+    #define BUTTON4_PROVIDER                BUTTON_PROVIDER_ANALOG
+    #define BUTTON4_ANALOG_LEVEL            730
+
+    // Relays
+    #define RELAY1_PIN                      14
+    #define RELAY2_PIN                      12
+    #define RELAY3_PIN                      13
+    #define RELAY4_PIN                      5
+    #define RELAY4_TYPE                     RELAY_TYPE_INVERSE
+
+    // LEDs
+    #define LED1_PIN                        2
+    #define LED1_PIN_INVERSE                1    
+
+    // CSE7766
+    #define CSE7766_SUPPORT                 1
+    #define CSE7766_RX_PIN                  3
 
 // ----------------------------------------------------------------------------------------
 //  Homecube 16A is similar but some pins differ and it also has RGB LEDs
